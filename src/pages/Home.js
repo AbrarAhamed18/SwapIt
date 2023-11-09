@@ -208,6 +208,24 @@ const Home = () => {
         </div>
     </section>
 
+    <section className="famous-wrapper py-5 home-wrapper-2">
+        <div className="container-xxl">
+            <div className="row">
+                <div className="col-3">
+                    <div className="famous-card position-relative">
+                        <img src="images/watch.jpg" alt="" />
+                        <div className="famous-content position-absolute">
+                            <h5>Big Screen</h5>
+                            <h6>Smart Watch Series 7</h6>
+                            <p>From $399 or $16.62/mo. for mo.*</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section className='special-wrapper py-5 home-wrapper-2'>
         <div className="container-xxl">
             <div className="row">

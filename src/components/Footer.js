@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {BsLinkedin,BsGithub,BsYoutube,BsInstagram} from "react-icons/bs"
 
-
+//import newsletter from"../images/newsletter.png"
 const Footer = () => {
   return (
     <>
@@ -10,19 +10,19 @@ const Footer = () => {
         <div className='container-xxl'>
             <div className='row align-items-center'>
                 <div className='col-5'>
-                    <div className='footer-top-data d-flex gap-30 align-items-center'>
-                        <img src="images/newsletter.png" alt="newsletter"/>
+                    {/* <div className='footer-top-data d-flex gap-30 align-items-center'>
+                        <img src={newsletter} alt="newsletter"/>
                         <h2 className='mb-0 text-white'>Sign Up for NewsLetter</h2>
-                    </div>
+                    </div> */}
                 </div>
-                <div className='col-7'>
-                <div class="input-group py-1">
+                {/* <div className='col-7'>
+                <div className="input-group py-1">
                         <input type="text" className="form-control py-2" placeholder="Your Email" aria-label="Your Email" aria-describedby="basic-addon2"/>
                         <span className="input-group-text p-2" id="basic-addon2">
                             Subscribe
                         </span>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     </footer>
@@ -59,7 +59,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className='col-3'>
+                {/* <div className='col-3'>
                     <h4 className='text-white mb-4'>Information</h4>
                     <div className='footer-links d-flex flex-column'>
                         <Link className='text-white py-2 mb-1'>Privacy Policy</Link>
@@ -69,7 +69,7 @@ const Footer = () => {
                         <Link className='text-white py-2 mb-1'>Blogs</Link>
 
                     </div>
-                </div>
+                </div> */}
                 <div className='col-3'>
                     <h4 className='text-white mb-4'> Account</h4>
                     <div className='footer-links d-flex flex-column'>

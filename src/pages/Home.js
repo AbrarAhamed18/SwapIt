@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
-import BlogCard from '../components/BlogCard';
+
 import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/SpecialProduct';
-
+import Container from '../components/Container';
+import {services }from "../utils/Data"
 const Home = () => {
   return (
     <>
-    <section className='home-wrapper-1 py-5'>
-        <div className='container-xxl'>
-            <div className='row'>
+    <Container class1="home-wrapper-1 py-5">
+    <div className='row'>
                 <div className='col-6'>
                     <div className='main-banner position-relative '>
                         <img src="images/main-banner-1.jpg" className='img-fluid rounded-3' alt="mainbanner"/>
@@ -76,59 +76,33 @@ const Home = () => {
                 </div>
 
             </div>
-        </div>
-    </section>
-
-    <section className='home-wrapper-2 py-5'>
-        <div className='container-xxl'>
+    </Container>
+   <Container class1="home-wrapper-2 py-5">
+  
+        
             <div className='row'>
                 <div className='col-12'>
                     <div className='services d-flex align-items-center justify-content-between'>
-                        <div className="d-flex align-items-center gap-15">
-                            <img src="images/service.png" alt="services"/>
-                            <div>
-                                <h6>Free Shipping</h6>
-                                <p className="mb-0">From all orders over $100</p>
-                            </div>
-                        </div>
-                        <div className="d-flex align-items-center gap-15">
-                            <img src="images/service-02.png" alt="services"/>
-                            <div>
-                                <h6>Daily Surprise Offers</h6>
-                                <p className="mb-0">save upto 25% off</p>
-                            </div>
-                                
-                        </div>
-                        <div className="d-flex align-items-center gap-15">
-                            <img src="images/service-03.png" alt="services"/>
-                            <div>
-                                <h6>Support 24/7</h6>
-                                <p className="mb-0">shop with an expert</p>
-                            </div>
-                        </div>
-                        <div className="d-flex align-items-center gap-15">
-                            <img src="images/service-04.png" alt="services"/>
-                            <div>
-                                <h6>Affordable Prices</h6>
-                                <p className="mb-0">Get Factory Direct Price</p>
-                            </div>
-                        </div>
-                        <div className="d-flex align-items-center gap-15">
-                            <img src="images/service-05.png" alt="services"/>
-                            <div>
-                                <h6>Secure Payments</h6>
-                                <p className="mb-0">100% Protected Payments</p>
-                            </div>
-                        </div>
-                    </div>
+                        {services?.map((i,j)=>{
+                            return(
+                                <div className="d-flex align-items-center gap-15" key={j}>
+                                <img src={i.image} alt="services"/>
+                                <div>
+                                    <h6>{i.title}</h6>
+                                    <p className="mb-0">{i.tagline}</p>
+                                </div>
+                                </div>
+                            );
+                        })}
+                        
                 </div>
             </div>
         </div>
-    </section>
+   
+   </Container>
 
-    <section className='home-wrapper-2 py-5'>
-        <div className='container-xxl'>
-            <div className='row'>
+    <Container class1='home-wrapper-2 py-5'>
+    <div className='row'>
                 <div className='col-12'>
                     <div className='categories d-flex justify-content-between flex-wrap align-items-center'>
                         <div className='d-flex gap align-items-center'>
@@ -191,12 +165,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+    </Container>
 
-    <section className="featured-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-            <div className="row">
+   <Container class1="featured-wrapper py-5 home-wrapper-2">
+   <div className="row">
                 <div className="col-12">
                    <h3 className="section-heading">Featured Collection</h3> 
                 </div>
@@ -205,12 +177,10 @@ const Home = () => {
                 <ProductCard/>
                 <ProductCard/>
             </div>
-        </div>
-    </section>
-
-    <section className="famous-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-            <div className="row">
+   </Container>
+   
+<Container>
+<div className="row">
                 <div className="col-3">
                     <div className="famous-card position-relative">
                         <img src="images/watch.jpg" className='img-fluid' alt="" />
@@ -254,12 +224,11 @@ const Home = () => {
                 </div>
 
             </div>
-        </div>
-        
-    </section>
+</Container>
+    
 
-    <section className='special-wrapper py-5 home-wrapper-2'>
-        <div className="container-xxl">
+    <Container class1='special-wrapper py-5 home-wrapper-2'>
+        
             <div className="row">
                 <div className="col-12">
                     <h3 className='section-heading'>Special Products</h3>
@@ -270,12 +239,12 @@ const Home = () => {
                 <SpecialProduct/>
                 <SpecialProduct/>
             </div>
-        </div>
+       
 
-    </section>
+    </Container>
 
-    <section className="popular-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
+    <Container className="popular-wrapper py-5 home-wrapper-2">
+       
             <div className="row">
                 <div className="col-12">
                    <h3 className="section-heading">Our Popular Products </h3> 
@@ -289,11 +258,11 @@ const Home = () => {
                 <ProductCard/>
                 <ProductCard/>
             </div>
-        </div>
-    </section>
+       
+    </Container>
 
-    <section className='marquee-wrapper py-5'>
-        <div className='container-xxl'>
+    <Container className='marquee-wrapper py-5'>
+        
             <div className='row'>
                 <div className='col-12'>
                     <div className='marquee-inner-wrapper card-wrapper'>
@@ -326,24 +295,21 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        
+    </Container>
 
     
 
-    <section className="blog-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
+    {/* <Container className="blog-wrapper py-5 home-wrapper-2">
+       
             <div className="row">
                 <div className="col-12">
                    <h3 className="section-heading">Our Latest Blogs</h3> 
                 </div>
-                <BlogCard/>
-                <BlogCard/>
-                <BlogCard/>
-                <BlogCard/>
+                
             </div>
-        </div>
-    </section>
+        
+    </Container> */}
     </>
   )
 }

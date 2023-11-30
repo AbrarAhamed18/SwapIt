@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Breadcrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
-import { Link } from 'react-router-dom';
+import {useDispatch,useSelector} from 'react-redux'
+import { Link,useLocation } from 'react-router-dom';
 import ReactImageZoom from"react-image-zoom"
 import ProductCard from "../components/ProductCard";
 import  { CiHeart } from "react-icons/ci";
+
 import watch from "../images/watch.jpg"
 import Container from "../components/Container";
+import { getAProduct } from "../features/products/productSlice";
+import { toast } from "react-toastify";
+import { addProdToCart } from "../features/user/userSlice";
 const  SingleProduct= () => {
+  const[quantity,setQuantity]=useState(1)
+  
+  const dispatch=useDispatch();
+  const location=useLocation()
+  const getProductId=location.pathname.split("/")[2]
+  const productState=useSelector(state=>state.product.product)
+  useEffect(()=>{
+    getProduct()
+},[])
+const uploadCart=()=>{
+    dispatch(addProdToCart({productId:productState?._id,quantity,price:productState?.price,}))
+}
+const getProduct=()=>{
+    dispatch(getAProduct(getProductId))
+}
     const props = {width: 400, height: 250, zoomWidth: 500, img:watch};
     const[orderedProduct,setorderedProduct]=useState(true)
   return (
@@ -44,15 +64,15 @@ const  SingleProduct= () => {
             <div className="main-product-details">
                 <div className="border-bottom">
                     <h3 className="title">
-                        Watch
+                        {productState?.title}
                     </h3>
                 </div>
                 <div className="border-bottom">
-                    <p className="price">$100</p>
+                    <p className="price">{productState?.price}</p>
                     <div className="d-flex align-items-center gap-10">
                     <ReactStars  count={5}
                     size={24}
-                    value={4}
+                    value={productState?.totalrating}
                     edit={false}
                     activeColor="#ffd700" />
                     <p className="mb-0"> (3 Reviews)</p>
@@ -66,15 +86,15 @@ const  SingleProduct= () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center">
                 <h3 className="product-heading">Brand :</h3>
-                <p className="product-data">Havel</p>
+                <p className="product-data">{productState?.brand}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
                 <h3 className="product-heading">Category :</h3>
-                <p className="product-data">Watch</p>
+                <p className="product-data">{productState?.category}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
                 <h3 className="product-heading">Tags :</h3>
-                <p className="product-data">Watch</p>
+                <p className="product-data">{productState?.tags}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center">
                 <h3 className="product-heading">Availability :</h3>
@@ -96,11 +116,14 @@ const  SingleProduct= () => {
                 <div className="d-flex gap-10 align-items-center gap-15 flex-row mt-2 mb-3">
                 <h3 className="product-heading">Quantity:</h3>
                 <div className="">
-                    <input type="number" name="" min={1} max={10} className="form-control" style={{width:"70px"}} id="" />
+                    <input type="number" name="" min={1} max={10} className="form-control" style={{width:"70px"}} id="" 
+                    onChange={(e)=>setQuantity(e.target.value)}
+                    value={quantity}
+                    />
 
                 </div>
                 <div className="d-flex-align-items-centre gap-30 ms-5">
-                <button className="button border-0" type="submit">Add to Cart</button>
+                <button className="button border-0" type="button" onClick={()=>{uploadCart()}}>Add to Cart</button>
                     <button className="button signup">Buy Now</button>
                 </div>
                 
@@ -124,7 +147,7 @@ const  SingleProduct= () => {
           <h4>Description</h4>
             <div className="bg-white p-3">
             
-            <p >Nice Product</p>
+            <p dangerouslySetInnerHTML={{__html:productState?.description}}></p>
             </div>
           </div>
           

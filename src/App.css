@@ -61,6 +61,10 @@ a{
   background-color: var(--color-febd96);
   color: #131921;
 }
+.error{
+  color:red;
+  font-size: 12px;
+}
 
 /*Header Part*/
 
@@ -299,8 +303,6 @@ footer .input-group-text{
 
 .product-card:hover .action-bar{
   right:15px;
-
-
 }
 
 .product-card .product-details h6{
@@ -338,12 +340,6 @@ footer .input-group-text{
   background-color: white;
 }
 
-
-
-
-/* Special product Part Ends Here*/
-
-/* Famous card*/
 .famous-card .famous-content{
   top:10%;
   left:10%;

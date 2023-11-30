@@ -1,12 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
-
+import{useDispatch,useSelector} from "react-redux"
 import ProductCard from '../components/ProductCard';
 import SpecialProduct from '../components/SpecialProduct';
 import Container from '../components/Container';
 import {services }from "../utils/Data"
+import { getAllProducts } from '../features/products/productSlice';
+
 const Home = () => {
+    const productState=useSelector((state)=>state.product.product)
+    const navigate=useNavigate()
+    
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        getallProducts()
+    })
+    const getallProducts=()=>{
+            dispatch(getAllProducts())
+    }
   return (
     <>
     <Container class1="home-wrapper-1 py-5">
@@ -167,7 +179,7 @@ const Home = () => {
             </div>
     </Container>
 
-   <Container class1="featured-wrapper py-5 home-wrapper-2">
+   {/* <Container class1="featured-wrapper py-5 home-wrapper-2">
    <div className="row">
                 <div className="col-12">
                    <h3 className="section-heading">Featured Collection</h3> 
@@ -177,7 +189,7 @@ const Home = () => {
                 <ProductCard/>
                 <ProductCard/>
             </div>
-   </Container>
+   </Container> */}
    
 <Container>
 <div className="row">
@@ -235,15 +247,30 @@ const Home = () => {
                 </div>
             </div>
             <div className="row">
-                <SpecialProduct/>
-                <SpecialProduct/>
-                <SpecialProduct/>
+                {
+                productState &&productState.map((item,index)=>{
+                    
+                        
+                        return <SpecialProduct key={index}
+                        brand={item?.brand} 
+                        id={item?._id}
+                        title={item?.title}
+                        total={item?.totalrating.toString()}
+                        price={item?.price}
+                        sold={item?.sold}
+                        quantity={item?.quantity}
+
+                        />
+                    
+                })
+            }
+               
             </div>
        
 
     </Container>
 
-    <Container className="popular-wrapper py-5 home-wrapper-2">
+    {/* <Container className="popular-wrapper py-5 home-wrapper-2">
        
             <div className="row">
                 <div className="col-12">
@@ -252,14 +279,26 @@ const Home = () => {
                 
             </div>
             <div className="row">
+            {
+                productState &&productState.map((item,index)=>{
+                    
+                        
+                        return <ProductCard key={index}
+                        brand={item?.brand} 
+                        title={item?.title}
+                        total={item?.totalrating.toString()}
+                        price={item?.price}
+                        sold={item?.sold}
+                        quantity={item?.quantity}
+
+                        />
+                    
+                })
+            }
                 
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
-                <ProductCard/>
             </div>
        
-    </Container>
+    </Container> */}
 
     <Container className='marquee-wrapper py-5'>
         

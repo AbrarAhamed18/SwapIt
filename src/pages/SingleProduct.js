@@ -3,7 +3,7 @@ import Breadcrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ReactStars from "react-rating-stars-component";
 import {useDispatch,useSelector} from 'react-redux'
-import { Link,useLocation } from 'react-router-dom';
+import { Link,useLocation,useNavigate } from 'react-router-dom';
 import ReactImageZoom from"react-image-zoom"
 import ProductCard from "../components/ProductCard";
 import  { CiHeart } from "react-icons/ci";
@@ -12,19 +12,30 @@ import watch from "../images/watch.jpg"
 import Container from "../components/Container";
 import { getAProduct } from "../features/products/productSlice";
 import { toast } from "react-toastify";
-import { addProdToCart } from "../features/user/userSlice";
+import { addProdToCart, getUserCart } from "../features/user/userSlice";
 const  SingleProduct= () => {
   const[quantity,setQuantity]=useState(1)
-  
+  const [alreadyAdded,setAlreadyAdded]=useState(false)
   const dispatch=useDispatch();
   const location=useLocation()
+  const navigate=useNavigate()
   const getProductId=location.pathname.split("/")[2]
   const productState=useSelector(state=>state.product.product)
+  const cartState=useSelector(state=>state.auth.cartProducts)
   useEffect(()=>{
     getProduct()
+    dispatch(getUserCart())
+},[])
+useEffect(()=>{
+  for(let index=0;index<cartState.length;index++){
+    if(getProductId===cartState[index]?.productId?._id){
+        setAlreadyAdded(true)
+    }
+  }
 },[])
 const uploadCart=()=>{
     dispatch(addProdToCart({productId:productState?._id,quantity,price:productState?.price,}))
+    navigate('/cart')
 }
 const getProduct=()=>{
     dispatch(getAProduct(getProductId))
@@ -114,7 +125,9 @@ const getProduct=()=>{
                 
                 </div> */}
                 <div className="d-flex gap-10 align-items-center gap-15 flex-row mt-2 mb-3">
-                <h3 className="product-heading">Quantity:</h3>
+                {
+                  alreadyAdded===false && <>
+                  <h3 className="product-heading">Quantity:</h3>
                 <div className="">
                     <input type="number" name="" min={1} max={10} className="form-control" style={{width:"70px"}} id="" 
                     onChange={(e)=>setQuantity(e.target.value)}
@@ -122,8 +135,10 @@ const getProduct=()=>{
                     />
 
                 </div>
+                  </>
+                }
                 <div className="d-flex-align-items-centre gap-30 ms-5">
-                <button className="button border-0" type="button" onClick={()=>{uploadCart()}}>Add to Cart</button>
+                <button className="button border-0" type="button" onClick={()=>{alreadyAdded? navigate('/cart'):uploadCart()}}>{alreadyAdded?"Go To Cart":"Add To Cart"}</button>
                     <button className="button signup">Buy Now</button>
                 </div>
                 
